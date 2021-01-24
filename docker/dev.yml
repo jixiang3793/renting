@@ -1,0 +1,32 @@
+version: '2'
+services:
+  # nginx-proxy:
+  #   image: jwilder/nginx-proxy
+  #   ports:
+  #     - "8000:80"
+  #   volumes:
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+  # app:
+  #   extends:
+  #     file: app.yml
+  #     service: app
+  # appslave:
+  #   extends:
+  #     file: appslave.yml
+  #     service: appslave
+  mongo:
+    extends:
+      file: mongo.yml
+      service: mongo
+  redis:
+    extends:
+      file: redis.yml
+      service: redis
+  # elasticsearch:
+  #   extends:
+  #     file: elasticsearch.yml
+  #     service: elasticsearch
+  # minio:
+  #   extends:
+  #     file: minio.yml
+  #     service: minio

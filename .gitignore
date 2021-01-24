@@ -1,0 +1,14 @@
+dist/
+deploy_versions/
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+.idea/*
+.nyc_output
+build
+test
+coverage
+*.log
+package-lock.json
+spiders-js

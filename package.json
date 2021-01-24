@@ -1,0 +1,22 @@
+{
+  "name": "renting",
+  "version": "0.0.1",
+  "description": "renting apps",
+  "main": "index.js",
+  "scripts": {
+    "lerna:init": "lerna init",
+    "lerna:bootstrap": "lerna bootstrap"
+  },
+  "keywords": [
+    "renting",
+    "spider",
+    "taro",
+    "nodejs",
+    "eggjs"
+  ],
+  "author": "guozhixiang",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}

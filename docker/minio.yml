@@ -1,0 +1,12 @@
+version: '2'
+services:
+  minio:
+    image: minio/minio
+    volumes:
+      - ~/volumes/hezhi/datas/minio/:/data
+    ports:
+      - 9000:9000
+    environment:
+      - MINIO_ACCESS_KEY=jixiang255MINIO_ACCESS_KEY
+      - MINIO_SECRET_KEY=jixiang255MINIO_SECRET_KEY
+    command: server ~/volumes/hezhi/datas/minio/initdata

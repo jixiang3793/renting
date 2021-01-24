@@ -1,0 +1,8 @@
+version: '2'
+services:
+  redis:
+    image: hub.c.163.com/library/redis
+    volumes:
+      - ~/volumes/hezhi/datas/redis/:/data
+    ports:
+      - '6379:6379'
