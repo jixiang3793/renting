@@ -18,5 +18,8 @@
   "license": "ISC",
   "devDependencies": {
     "lerna": "^3.22.1"
+  },
+  "dependencies": {
+    "bullmq": "^1.14.1"
   }
 }

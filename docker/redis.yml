@@ -1,7 +1,7 @@
 version: '2'
 services:
   redis:
-    image: hub.c.163.com/library/redis
+    image: redis
     volumes:
       - ~/volumes/hezhi/datas/redis/:/data
     ports:
