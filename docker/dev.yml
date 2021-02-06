@@ -14,10 +14,14 @@ services:
   #   extends:
   #     file: appslave.yml
   #     service: appslave
-  mongo:
+  mysql:
     extends:
-      file: mongo.yml
-      service: mongo
+      file: mysql.yml
+      service: mysql
+  adminer:
+    extends:
+      file: mysql.yml
+      service: adminer
   redis:
     extends:
       file: redis.yml
