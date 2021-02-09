@@ -1,8 +1,4 @@
-export interface IAuditBase {
-  createTime: string;
-  updateTime?: string;
-  operator: string;
-}
+import { IAuditBase } from "./base";
 
 export interface IUser extends IAuditBase {
   id?: string;
@@ -12,5 +8,7 @@ export interface IUser extends IAuditBase {
   address?: string;
   area?: string;
   password: string;
+  email: string;
+  phone?: string;
 }
 

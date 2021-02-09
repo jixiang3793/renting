@@ -4,7 +4,8 @@
     "password": "gzx12345678",
     "database": "renting",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "seederStorage": "sequelize"
   },
   "test": {
     "username": "root",

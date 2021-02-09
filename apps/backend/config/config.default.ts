@@ -1,7 +1,14 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 
 export default (appInfo: EggAppInfo) => {
-  const config = {} as PowerPartial<EggAppConfig>;
+  const config = {
+
+    jwt: {
+      secret: 'gzx12345678',
+      ignore: [/^\/$/, '/admin','/public','/api/public'],
+      enable: true,
+    },
+  } as PowerPartial<EggAppConfig>;
 
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security

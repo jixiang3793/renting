@@ -19,19 +19,27 @@
     "ci": "npm run lint && npm run cov && npm run tsc",
     "autod": "autod",
     "lint": "eslint . --ext .ts",
-    "clean": "ets clean"
+    "clean": "ets clean",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "db:seed:all": "npx sequelize-cli db:seed:all",
+    "db:seed:undo": "npx sequelize-cli db:seed:undo",
+    "db:seed:undo:all": "npx sequelize-cli db:seed:undo:all"
   },
   "dependencies": {
     "egg": "^2.6.1",
+    "egg-jwt": "^3.1.7",
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.6.0",
     "egg-sequelize": "^6.0.0",
+    "egg-view-nunjucks": "^2.3.0",
     "mysql2": "^2.2.5"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.12",
     "@types/supertest": "^2.0.0",
+    "@hezhi/types-renting": "0.0.1",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
     "egg-bin": "^4.11.0",

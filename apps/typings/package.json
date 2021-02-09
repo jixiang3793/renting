@@ -1,5 +1,5 @@
 {
-  "name": "@hezhi/renting-typings",
+  "name": "@hezhi/types-renting",
   "version": "0.0.1",
   "description": "renting entity deine",
   "main": "build/main/index.js",

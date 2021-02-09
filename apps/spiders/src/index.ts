@@ -1,4 +1,4 @@
-
+// import { IUser } from '@hezhi/types-renting';
 
 
 /**
@@ -8,3 +8,7 @@
  * 用户触发
 */
 console.log("fdsfds");
+
+
+// const user: IUser = null;
+
