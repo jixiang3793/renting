@@ -1,8 +1,18 @@
+import { APIBase } from './base'
+import request from '@/utils/request'
 class APIUser extends APIBase {
-  constructor() {
-    super('user');
+  constructor () {
+    super('users')
+  }
+
+  getNormalUserList (parameter) {
+    return request({
+      url: `/${this.name}/normal`,
+      method: 'post',
+      data: parameter
+    })
   }
 }
-const user = new APIUser();
+const apiUser = new APIUser()
 
-export default user;
+export default apiUser

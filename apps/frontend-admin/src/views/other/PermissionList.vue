@@ -30,7 +30,7 @@
     <s-table :columns="columns" :data="loadData">
 
       <span slot="actions" slot-scope="text, record">
-        <a-tag v-for="(action, index) in record.actionList" :key="index">{{ action.describe }}</a-tag>
+        <a-tag v-for="(action, index) in record.actionEntitySet" :key="index">{{ action.describe }}</a-tag>
       </span>
 
       <span slot="status" slot-scope="text">
@@ -197,7 +197,7 @@ export default {
         }).then(res => {
           const result = res.result
           result.data.map(permission => {
-            permission.actionList = JSON.parse(permission.actionData)
+            permission.actionEntitySet = JSON.parse(permission.actionEntitySet)
             return permission
           })
           return result

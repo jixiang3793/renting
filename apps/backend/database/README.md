@@ -2,6 +2,9 @@
 
 npx sequelize migration:generate --name=init-users
 
+
+model定义时，define默认加s，创建表格时需要注意加s，参见user_roles
+
 ```
 # 升级数据库
 npx sequelize db:migrate

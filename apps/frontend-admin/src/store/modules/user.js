@@ -52,11 +52,22 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
           const result = response.result
-
+          if (result.roles && !result.role) {
+            result.role = result.roles[0]
+          }
+          if (typeof result.role.permissions === 'string') {
+            result.role.permissions = JSON.parse(result.role.permissions)
+          }
           if (result.role && result.role.permissions.length > 0) {
             const role = result.role
             role.permissions = result.role.permissions
             role.permissions.map(per => {
+              if (!per.permissionId) {
+                per.permissionId = per.id
+              }
+              if (per.actionEntitySet != null && typeof per.actionEntitySet === 'string') {
+                per.actionEntitySet = JSON.parse(per.actionEntitySet)
+              }
               if (per.actionEntitySet != null && per.actionEntitySet.length > 0) {
                 const action = per.actionEntitySet.map(action => { return action.action })
                 per.actionList = action

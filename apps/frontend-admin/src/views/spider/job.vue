@@ -145,10 +145,10 @@
 <script>
 import moment from 'moment'
 import { STable } from '@/components'
-import apiUser from '@/api/user'
+import apiSpiderJob from '@/api/spider-job'
 
 export default {
-  name: 'TableList',
+  name: 'SpidersJobList',
   components: {
     STable
   },
@@ -168,32 +168,37 @@ export default {
       advanced: false,
       // 查询参数
       queryParam: {},
-      // 表头
+      // 表头 地区或地铁线，url，间隔时间，截止时间、数据类型
       columns: [
         {
-          title: '用户名',
+          title: '作业名',
           dataIndex: 'name',
           controlType: 'text',
           required: true
         },
         {
-          title: '手机号码',
-          dataIndex: 'phoneNum',
+          title: 'URL',
+          dataIndex: 'url',
           controlType: 'text'
         },
         {
-          title: '邮箱',
-          dataIndex: 'email',
-          controlType: 'text'
-        },
-        {
-          title: '区域',
+          title: '地区',
           dataIndex: 'area',
-          controlType: 'text'
+          controlType: 'cascader'
         },
         {
-          title: '更新时间',
-          dataIndex: 'updatedAt',
+          title: '数据类型',
+          dataIndex: 'dataType',
+          controlType: 'select'
+        },
+        {
+          title: '间隔时间',
+          dataIndex: 'every',
+          controlType: 'number'
+        },
+        {
+          title: '创建时间',
+          dataIndex: 'createdAt',
           sorter: true
         },
         {
@@ -206,7 +211,7 @@ export default {
       // 加载数据方法 必须为 Promise 对象
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
-        return apiUser.getNormalUserList(Object.assign(parameter, this.queryParam))
+        return apiSpiderJob.list(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res.result
           })
@@ -256,7 +261,7 @@ export default {
     handleOk () {
       this.form.validateFields((err, values) => {
         if (!err) {
-          apiUser.save(values).then(() => {
+          apiSpiderJob.save(values).then(() => {
           })
         }
       })

@@ -8,5 +8,5 @@ export interface IRole extends IAuditBase {
   status: number,
   creatorId: string;
   createTime: string;
-  permissions: IPermission[];
+  permissions?: IPermission[];
 }

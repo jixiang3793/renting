@@ -1,20 +1,24 @@
 import request from '@/utils/request'
 
 export class APIBase {
-  name = '';
-  constructor(name) {
-    this.name = name;
+  // name = ''
+  constructor (name) {
+    this.name = name
   }
-  list(parameter) {
+  list (parameter) {
     return request({
-      url: `/api/${this.name}`,
+      url: `/${this.name}`,
       method: 'post',
       data: parameter
     })
   }
-  get() {
-    
+  get () {}
+  save (parameter) {
+    return request({
+      url: `/${this.name}`,
+      method: 'post',
+      data: parameter
+    })
   }
-  save() {}
-  delete() {}
+  delete () {}
 }
