@@ -1,0 +1,10 @@
+const role = require("../tables/role");
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('roles', role);
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('roles');
+  }
+};

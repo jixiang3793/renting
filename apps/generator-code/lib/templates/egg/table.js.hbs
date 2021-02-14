@@ -1,0 +1,18 @@
+const { Sequelize } = require('sequelize');
+
+const { INTEGER, DATE, STRING, BOOLEAN, TEXT } = Sequelize;
+
+module.exports = {
+    id: { type: INTEGER, primaryKey: true, autoIncrement: true },
+    name: {type:STRING(30),unique: true},
+    age: INTEGER,
+    sex: BOOLEAN,
+    address: TEXT,
+    area: TEXT,
+    password: TEXT,
+    email: TEXT,
+    phoneNum: TEXT,
+    created_at: DATE,
+    updated_at: DATE,
+    operator: TEXT
+}

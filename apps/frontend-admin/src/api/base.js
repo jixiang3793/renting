@@ -5,11 +5,13 @@ export class APIBase {
   constructor (name) {
     this.name = name
   }
+  toQuery (parameter) {
+    return Object.keys(parameter).map(it => `${it}=${parameter[it]}`).join('&')
+  }
   list (parameter) {
     return request({
-      url: `/${this.name}`,
-      method: 'post',
-      data: parameter
+      url: `/${this.name}?${this.toQuery(parameter)}`,
+      method: 'get'
     })
   }
   get () {}
@@ -20,5 +22,10 @@ export class APIBase {
       data: parameter
     })
   }
-  delete () {}
+  delete (id) {
+    return request({
+      url: `/${this.name}/${id}`,
+      method: 'DELETE'
+    })
+  }
 }

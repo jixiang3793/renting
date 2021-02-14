@@ -1,0 +1,11 @@
+{
+  "name": "generator-code",
+  "version": "1.0.0",
+  "bin": {
+    "hezhi-generator": "./index"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "handlebars": "^4.7.6"
+  }
+}

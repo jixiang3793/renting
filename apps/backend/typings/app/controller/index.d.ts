@@ -5,6 +5,7 @@ import 'egg';
 import ExportAccess from '../../../app/controller/access';
 import ExportBase from '../../../app/controller/base';
 import ExportCurd from '../../../app/controller/curd';
+import ExportSpiderdataitem from '../../../app/controller/spiderdataitem';
 import ExportSpiderjob from '../../../app/controller/spiderjob';
 import ExportSpiderjoblog from '../../../app/controller/spiderjoblog';
 import ExportUser from '../../../app/controller/user';
@@ -15,6 +16,7 @@ declare module 'egg' {
     access: ExportAccess;
     base: ExportBase;
     curd: ExportCurd;
+    spiderdataitem: ExportSpiderdataitem;
     spiderjob: ExportSpiderjob;
     spiderjoblog: ExportSpiderjoblog;
     user: ExportUser;

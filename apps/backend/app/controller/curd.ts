@@ -20,8 +20,11 @@ class CurdController extends BaseController {
   
   async index() {
     const ctx = this.ctx;
-    const query = { limit: this.toInt(ctx.query.limit), offset: this.toInt(ctx.query.offset) };
-    ctx.body = await ctx.model[this.mname].findAll(query);
+    const limit = this.toInt(this.ctx.query.pageSize);
+    const offset = limit * (this.toInt(this.ctx.query.pageNo) - 1);
+    const query = { limit,offset };
+    const { count, rows } = await ctx.model[this.mname].findAndCountAll(query);
+    ctx.body = {result:{ data:rows,pageSize:limit,pageNo:this.toInt(this.ctx.query.pageNo),totalCount: count }};
   }
   async new() {
   }
@@ -31,19 +34,16 @@ class CurdController extends BaseController {
   }
   async create() {
     const ctx = this.ctx;
-    const user = await ctx.model[this.mname].create(ctx.request.body);
+    const entity = await ctx.model[this.mname].create(ctx.request.body);
     ctx.status = 201;
-    ctx.body = user;
+    ctx.body = entity;
   }
   async update() {
   }
   async destroy() {
+
   }
 
-  onRespose({status,message}) {
-    this.ctx.status = status;
-    this.ctx.body = message;
-  }
 }
 
 export default CurdController;

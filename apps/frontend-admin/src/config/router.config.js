@@ -24,7 +24,7 @@ export const asyncRouterMap = [
       {
         path: '/datas',
           name: 'DatasList',
-          component: () => import('@/views/list/user'),
+          component: () => import('@/views/list/spiderdataitem'),
           meta: { title: '数据管理', keepAlive: true, permission: ['datas'] }
       },
       {
@@ -41,15 +41,21 @@ export const asyncRouterMap = [
         children: [
           {
             path: '/spiders/queue',
-            name: 'UserList',
-            component: () => import('@/views/other/UserList'),
+            name: 'spiderQueue',
+            component: () => import('@/views/spider/queue'),
             meta: { title: '用户任务', keepAlive: true, permission: ['spiders.queue'] }
           },
           {
             path: '/spiders/job',
-            name: 'RoleList',
-            component: () => import('@/views/other/RoleList'),
+            name: 'spiderJob',
+            component: () => import('@/views/spider/job'),
             meta: { title: '爬虫作业', keepAlive: true, permission: ['spiders.job'] }
+          },
+          {
+            path: '/spiders/joblog',
+            name: 'spiderJoblog',
+            component: () => import('@/views/spider/joblog'),
+            meta: { title: '作业日志', keepAlive: true, permission: ['spiders.job'] }
           }]
         },
       {

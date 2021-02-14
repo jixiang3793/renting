@@ -62,9 +62,6 @@
     </div>
 
     <div class="table-operator">
-      <a-button type="primary" icon="plus" @click="handleEdit()">新建</a-button>
-      <a-button @click="pause()">暂停</a-button>
-      <a-button @click="resume()">启动</a-button>
       <a-button type="dashed" @click="tableOption">{{ optionAlertShow && '关闭' || '开启' }} alert</a-button>
       <a-dropdown v-action:edit v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
@@ -82,7 +79,6 @@
       ref="table"
       size="default"
       rowKey="key"
-      :pagination="false"
       :columns="columns"
       :data="loadData"
       :alert="options.alert"
@@ -108,14 +104,14 @@
               <a href="javascript:;">禁用</a>
             </a-menu-item>
             <a-menu-item v-if="$auth('users.delete')">
-              <a @click="del(record.id)">删除</a>
+              <a href="javascript:;">删除</a>
             </a-menu-item>
           </a-menu>
         </a-dropdown>
       </span>
     </s-table>
     <a-modal
-      title="新增作业"
+      title="新增用户"
       :width="800"
       v-model="visible"
       @ok="handleOk"
@@ -124,6 +120,7 @@
 
         <!-- columns -->
         <template v-for="item in columns">
+
           <a-form-item
             :required="!!item.required"
             :key="item.dataIndex"
@@ -138,44 +135,6 @@
               :placeholder="item.title"
               :id="item.dataIndex" />
           </a-form-item>
-          <a-form-item
-            :required="!!item.required"
-            :key="item.dataIndex"
-            v-if="item.controlType === 'number'"
-            :labelCol="labelCol"
-            :wrapperCol="wrapperCol"
-            :label="item.title"
-            hasFeedback
-          >
-            <a-input-number
-              v-decorator="[item.dataIndex,{rules: [{ required: !!item.required, message: `请输入${item.title}` }]}]"
-              :placeholder="item.title"
-              :id="item.dataIndex" />
-          </a-form-item>
-          <a-form-item
-            :required="!!item.required"
-            :key="item.dataIndex"
-            v-if="item.controlType === 'select'"
-            :labelCol="labelCol"
-            :wrapperCol="wrapperCol"
-            :label="item.title"
-            hasFeedback
-          >
-          <a-select :placeholder="item.title" v-decorator="[item.dataIndex, {rules: [{ required: !!item.required, message: `请选择${item.title}`}]} ]">
-            <a-select-option v-for="opt in item.options" :value="opt.value" :key="opt.value">{{opt.label}}</a-select-option>
-          </a-select>
-          </a-form-item>
-          <a-form-item
-            :required="!!item.required"
-            :key="item.dataIndex"
-            v-if="item.controlType === 'cascader'"
-            :labelCol="labelCol"
-            :wrapperCol="wrapperCol"
-            :label="item.title"
-            hasFeedback
-          >
-          <a-cascader :options="item.options" :placeholder="item.title" v-decorator="[item.dataIndex, {rules: [{ required: !!item.required, message: `请选择${item.title}`}]} ]" />
-          </a-form-item>
         </template>
       </a-form>
     </a-modal>
@@ -185,11 +144,10 @@
 <script>
 import moment from 'moment'
 import { STable } from '@/components'
-import apiSpiderJob from '@/api/spider-job'
-import areas from '@/assets/area.json'
+import apiSpiderDataItem from '@/api/spider-data-item'
 
 export default {
-  name: 'SpidersJobList',
+  name: 'TableList',
   components: {
     STable
   },
@@ -209,91 +167,39 @@ export default {
       advanced: false,
       // 查询参数
       queryParam: {},
-      // 表头 地区或地铁线，url，间隔时间，截止时间、数据类型
+      // 表头
       columns: [
         {
-          title: '作业名',
-          dataIndex: 'name',
-          controlType: 'text',
-          required: true
+          title: '标题',
+          dataIndex: 'title',
+          width: '300px',
+          controlType: 'text'
         },
         {
-          title: 'URL',
+          title: '链接',
           dataIndex: 'url',
+          width: '300px',
           controlType: 'text',
           required: true
         },
         {
-          title: '区域',
+          title: '地区',
           dataIndex: 'area',
-          controlType: 'cascader',
-          options: areas
-        },
-        // https://blog.csdn.net/qq_38652871/article/details/106360255
-        {
-          title: '交通路线',
-          dataIndex: 'traffic',
-          controlType: 'cascader',
-          options: [
-        {
-          value: 'gongjiao',
-          label: '公交线路',
-          children: [
-            {
-              value: 'hangzhou',
-              label: 'Hangzhou',
-              children: [
-                {
-                  value: 'xihu',
-                  label: 'West Lake'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          value: 'subway',
-          label: '地铁',
-          children: [
-            {
-              value: 'nanjing',
-              label: 'Nanjing',
-              children: [
-                {
-                  value: 'zhonghuamen',
-                  label: 'Zhong Hua Men'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+          controlType: 'text'
         },
         {
           title: '数据类型',
           dataIndex: 'data_type',
-          controlType: 'select',
-          options: [{
-            label: '租房',
-            value: 'renting'
-          }, {
-            label: '二手房',
-            value: 'secondhandhouse'
-          }, {
-            label: '工作',
-            value: 'job'
-          }],
-          required: true
+          controlType: 'text'
         },
         {
-          title: '间隔时间',
-          dataIndex: 'every',
-          controlType: 'number',
-          required: true
+          title: '数据来源',
+          dataIndex: 'from',
+          controlType: 'text'
         },
         {
-          title: '创建时间',
-          dataIndex: 'createdAt',
+          title: '采集时间',
+          dataIndex: 'fetch_time',
           sorter: true
         },
         {
@@ -306,16 +212,8 @@ export default {
       // 加载数据方法 必须为 Promise 对象
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
-        return apiSpiderJob.list(Object.assign(parameter, this.queryParam))
+        return apiSpiderDataItem.list(Object.assign(parameter, this.queryParam))
           .then(res => {
-            res.result.data.forEach(it => {
-              if (typeof it.traffic === 'string') {
-                it.traffic = JSON.parse(it.traffic)
-              }
-              if (typeof it.area === 'string') {
-                it.area = JSON.parse(it.area)
-              }
-            })
             return res.result
           })
       },
@@ -338,7 +236,6 @@ export default {
     // getRoleList({ t: new Date() })
   },
   methods: {
-    onChange () {},
     tableOption () {
       if (!this.optionAlertShow) {
         this.options = {
@@ -365,15 +262,7 @@ export default {
     handleOk () {
       this.form.validateFields((err, values) => {
         if (!err) {
-          if (values.area) {
-            values.area = JSON.stringify(values.area)
-          }
-          if (values.traffic) {
-            values.traffic = JSON.stringify(values.traffic)
-          }
-          apiSpiderJob.save(values).then(() => {
-            this.visible = false
-            this.$refs.table.refresh()
+          apiSpiderDataItem.save(values).then(() => {
           })
         }
       })
@@ -391,17 +280,6 @@ export default {
       this.queryParam = {
         date: moment(new Date())
       }
-    },
-    pause () {
-      apiSpiderJob.pause().then()
-    },
-    resume () {
-      apiSpiderJob.resume().then()
-    },
-    del (id) {
-      apiSpiderJob.delete(id).then(() => {
-        this.$refs.table.refresh()
-      })
     }
   }
 }
