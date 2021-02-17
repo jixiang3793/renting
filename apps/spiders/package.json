@@ -9,8 +9,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
-    "dev:queue": "ts-node-script src/lib/queue.ts",
-    "dev:worker": "ts-node-script src/lib/worker.ts",
+    "dev:test": "ts-node-script src/test.ts",
     "dev:index": "ts-node-script src/index.ts",
     "build": "run-p build:*",
     "build:main": "tsc -p tsconfig.json",

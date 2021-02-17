@@ -1,4 +1,5 @@
 import { ISpiderJob, ISpiderJobLog } from "@hezhi/types-renting";
+import { browserOptions } from "../browser";
 const DriverFactory = require('../browser');
 
 export interface ISpider {
@@ -13,11 +14,11 @@ export abstract class BaseSpider implements ISpider {
   job: ISpiderJob;
   driver: any = null;
 
-  constructor(job: ISpiderJob, joblog: ISpiderJobLog) {
+  constructor(job: ISpiderJob, joblog: ISpiderJobLog, opts?: browserOptions) {
     this.joblog = joblog;
     this.job = job;
+    this.driver = new DriverFactory(opts);
     this.setUrl(job);
-    this.driver = new DriverFactory();
   }
 
   fetch(): Promise<number> {

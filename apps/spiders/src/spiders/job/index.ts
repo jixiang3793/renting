@@ -1,14 +1,14 @@
 import { ISpiderJob, ISpiderJobLog } from "@hezhi/types-renting";
 import { ISpider } from "../base";
 
-const RentingDoubanSpider = require('./douban');
-const RentingWubaSpider = require('./wuba');
+// const JobBossSpider = require('./boss');
+// const RentingWubaSpider = require('./wuba');
 
-class RentingSpiderFactory {
+class JobSpiderFactory {
   spiders: ISpider[] = [];
   constructor(job: ISpiderJob, joblog: ISpiderJobLog) {
-    this.spiders.push(new RentingWubaSpider(job,joblog,{headless: true}));
-    this.spiders.push(new RentingDoubanSpider(job,joblog,{headless: true}));
+    // this.spiders.push(new JobBossSpider(job,joblog));
+    // this.spiders.push(new RentingDoubanSpider(job,joblog));
   }
 
   start(): Promise<number> {
@@ -27,4 +27,4 @@ class RentingSpiderFactory {
   }
 }
 
-module.exports = RentingSpiderFactory;
+module.exports = JobSpiderFactory;
