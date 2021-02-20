@@ -18,9 +18,13 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-view-nunjucks',
   },
-  jwt : {
+  jwt: {
     enable: true,
     package: 'egg-jwt',
+  },
+  redis: {
+    enable: true,
+    package: 'egg-redis',
   }
 };
 

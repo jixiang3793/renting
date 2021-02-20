@@ -36,5 +36,35 @@ class UserController extends CurdController {
             pageNo: this.ctx.request.body.pageNo
         }}});
     }
+
+    public async sendCode() {
+        console.log("sendcode ...",this.ctx.query);
+        const email = this.ctx.query.email;
+        this.ctx.service.email.send(email);
+        this.onRespose({status:200,message:'ok'});
+    }
+
+    async register() {
+        console.log("register ...",this.ctx.request.body);
+        const params = this.ctx.request.body;
+        // const code = await this.ctx.service.email.generateCode();
+        const result = await this.ctx.service.email.verify(params.token);
+        if (!result) {
+            this.onRespose({status:412,message:'无效验证码'});
+        } else {
+            // params['role_id'] = 'user';
+            // params['user_name'] = params.name;
+            const entity = await this.ctx.model.User.create(params);
+            // const entity = await this.ctx.model.User.create(params, {
+            //     include: [ {
+            //         model: this.ctx.model.UserRole,
+            //         through: this.ctx.model.UserRole,
+            //     } ]
+            //   });
+            await this.ctx.model.UserRole.create({user_name: params.name,role_id: 'user',operator: 'self'});
+            // console.log("result ...",result);
+            this.onRespose({status:201,message:entity});
+        }
+    }
 }
 module.exports = UserController;
