@@ -1,0 +1,24 @@
+{
+  "name": "@hezhi/renting-spiders-js",
+  "version": "0.0.1",
+  "description": "nodejs selenium spiders",
+  "main": "index.js",
+  "scripts": {
+    "env:up": "docker-compose -f docker/dev.yml up -d",
+    "env:start": "docker-compose -f docker/dev.yml start",
+    "env:stop": "docker-compose -f docker/dev.yml stop",
+    "env:ps": "docker-compose -f docker/dev.yml ps",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jixiang255",
+  "license": "ISC",
+  "dependencies": {
+    "await-to-js": "^2.1.1",
+    "bloomfilter-redis": "^0.1.2",
+    "chromedriver": "^87.0.1",
+    "mongodb": "^3.2.7",
+    "redis": "^2.8.0",
+    "selenium-webdriver": "^4.0.0-alpha.4"
+  }
+}
